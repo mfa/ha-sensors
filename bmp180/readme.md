@@ -1,7 +1,9 @@
 ## install
 
 ```
-pip install RPi.bme280
+git clone https://github.com/Tijndagamer/bmp180.git
+cd bmp180
+python setup.py install
 ```
 
 ### homeassistent example config
@@ -33,3 +35,4 @@ template:
         device_class: atmospheric_pressure
         unique_id: "zero1_pressure"
 ```
+
