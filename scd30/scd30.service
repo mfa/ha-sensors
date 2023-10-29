@@ -1,0 +1,12 @@
+[Unit]
+Description=SCD30 push
+Wants=time-sync.target
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/home/pi/scd30/run.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
