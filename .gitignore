@@ -1,0 +1,4 @@
+# my actual .homeassistant/includes/templates/ should not be checked in here
+templates
+# don't checkin the .secret files
+*/.secret
