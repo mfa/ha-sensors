@@ -21,7 +21,7 @@ i2c:
   scl: 21
 
 sensor:
-  - platform: bme280
+  - platform: bme280_i2c
     temperature:
       name: "BME280 Temperature"
     pressure:
@@ -33,3 +33,11 @@ sensor:
     name: "BH1750 Illuminance"
     address: 0x23
     update_interval: 60s
+
+ota:
+  password: !secret ota_password
+
+text_sensor:
+  - platform: version
+    name: "ESPHome Version"
+    hide_timestamp: true
