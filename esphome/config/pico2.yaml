@@ -21,7 +21,7 @@ i2c:
   scl: 21
 
 sensor:
-  - platform: bme280
+  - platform: bme280_i2c
     temperature:
       name: "BME280 Temperature"
     pressure:
@@ -29,3 +29,11 @@ sensor:
     humidity:
       name: "BME280 Humidity"
     address: 0x76
+
+ota:
+  password: !secret ota_password
+
+text_sensor:
+  - platform: version
+    name: "ESPHome Version"
+    hide_timestamp: true
