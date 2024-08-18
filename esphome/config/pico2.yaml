@@ -29,6 +29,9 @@ sensor:
     humidity:
       name: "BME280 Humidity"
     address: 0x76
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
+    update_interval: 60s
 
 ota:
   platform: esphome
