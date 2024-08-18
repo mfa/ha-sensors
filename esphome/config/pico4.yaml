@@ -62,6 +62,7 @@ sensor:
     update_interval: 30s
 
 ota:
+  platform: esphome
   password: !secret ota_password
 
 text_sensor:
