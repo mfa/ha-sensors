@@ -1,0 +1,70 @@
+esphome:
+  name: pico5
+
+rp2040:
+  board: rpipicow
+  framework:
+    platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
+
+api:
+  password: ""
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+# Enable logging
+logger:
+  logs:
+    # disable log entries about the display updating too slow
+    component: ERROR
+
+time:
+  - platform: homeassistant
+    id: esptime
+    timezone: Europe/Berlin
+
+sensor:
+  - platform: homeassistant
+    id: temperature
+    entity_id: sensor.pico2_bme280_temperature
+    # don't republish the values:
+    internal: true
+
+  - platform: homeassistant
+    id: humidity
+    entity_id: sensor.pico2_bme280_humidity
+    internal: true
+
+font:
+  - file: "gfonts://Roboto"
+    id: font1
+    size: 24
+
+i2c:
+  sda: 0
+  scl: 1
+  scan: false
+
+display:
+  - platform: ssd1306_i2c
+    model: "SH1106 128x64"
+    address: 0x3C
+    update_interval: 5s
+    lambda: |-
+      it.strftime(0, 0, id(font1), "%H:%M", id(esptime).now());
+      if (id(temperature).has_state()) {
+        it.printf(0, 31, id(font1), "%.1f°", id(temperature).state);
+      }
+      if (id(humidity).has_state()) {
+        it.printf(60, 31, id(font1), "%d%%", int(id(humidity).state));
+      }
+
+ota:
+  platform: esphome
+  password: !secret ota_password
+
+text_sensor:
+  - platform: version
+    name: "ESPHome Version"
+    hide_timestamp: true
