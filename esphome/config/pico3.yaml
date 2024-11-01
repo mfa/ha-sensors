@@ -42,3 +42,6 @@ text_sensor:
   - platform: version
     name: "ESPHome Version"
     hide_timestamp: true
+  - platform: wifi_info
+    ip_address:
+      name: ESP IP Address
