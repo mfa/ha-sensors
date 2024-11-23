@@ -32,7 +32,7 @@ if __name__ == "__main__":
         "Altpapier 03-wöchentl.": "waste_paper",
         "Gelber Sack 03-wöchentl.": "waste_yellow_bag",
     }
-    dataset = {}
+    dataset = {"waste_yellow_bag": ""}
     for item in parse(r.text):
         _k = item.get("summary")
         if _k in key_map:
