@@ -2,3 +2,4 @@
 templates
 # don't checkin the .secret files
 */.secret
+*/.secret.json

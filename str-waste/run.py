@@ -23,8 +23,8 @@ def parse(stream):
 
 
 if __name__ == "__main__":
-    # copy webhook secret into file .secret
-    secret = (Path(__file__).parent / ".secret").open().read().strip()
+    # format of secret file: {"ip": "<ip-address>", "secret": "<secret>"}
+    secrets = json.load((Path(__file__).parent / ".secret.json").open())
 
     r = requests.get(url=sys.argv[1])
     key_map = {
@@ -32,12 +32,12 @@ if __name__ == "__main__":
         "Altpapier 03-wöchentl.": "waste_paper",
         "Gelber Sack 03-wöchentl.": "waste_yellow_bag",
     }
-    dataset = {"waste_yellow_bag": ""}
+    dataset = {"waste_yellow_bag": "2024-12-13"}
     for item in parse(r.text):
         _k = item.get("summary")
         if _k in key_map:
             dataset[key_map[_k]] = item.get("date")
             del key_map[_k]
 
-    r = requests.post(f"http://localhost:8123/api/webhook/{secret}", json=dataset)
+    r = requests.post(f"http://{secrets['ip']}:8123/api/webhook/{secrets['secret']}", json=dataset)
     assert r.status_code == 200
