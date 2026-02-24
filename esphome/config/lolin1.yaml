@@ -7,7 +7,8 @@ esp8266:
     version: recommended
 
 api:
-  password: ""
+  encryption:
+    key: !secret esp_key
 
 wifi:
   ssid: !secret wifi_ssid

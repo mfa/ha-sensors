@@ -11,7 +11,8 @@ logger:
 
 # Enable Home Assistant API
 api:
-  password: ""
+  encryption:
+    key: !secret esp_key
 
 wifi:
   ssid: !secret wifi_ssid

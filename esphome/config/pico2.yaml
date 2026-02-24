@@ -7,7 +7,8 @@ rp2040:
     platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
 
 api:
-  password: ""
+  encryption:
+    key: !secret esp_key
 
 wifi:
   ssid: !secret wifi_ssid

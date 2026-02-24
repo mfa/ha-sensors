@@ -3,9 +3,13 @@ esphome:
 
 esp32:
   board: esp32dev
+  framework:
+    type: esp-idf
 
 status_led:
   pin: 33
+
+psram: {}
 
 esp32_camera:
   id: espcam
@@ -28,6 +32,7 @@ esp32_camera:
       - delay: 1s
       - light.turn_off: cam_flash
   idle_framerate: 0 fps
+  frame_buffer_location: PSRAM
 
 output:
   - platform: ledc
@@ -52,7 +57,8 @@ logger:
 
 # Enable Home Assistant API
 api:
-  password: ""
+  encryption:
+    key: !secret esp_key
 
 wifi:
   ssid: !secret wifi_ssid

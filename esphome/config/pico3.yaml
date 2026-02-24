@@ -7,7 +7,8 @@ rp2040:
     platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
 
 api:
-  password: ""
+  encryption:
+    key: !secret esp_key
 
 wifi:
   ssid: !secret wifi_ssid
@@ -32,6 +33,9 @@ sensor:
   - platform: bh1750
     name: "BH1750 Illuminance"
     address: 0x23
+    update_interval: 60s
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
     update_interval: 60s
 
 ota:
